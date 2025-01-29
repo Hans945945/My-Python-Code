@@ -1,0 +1,6 @@
+data = list(map(int, input().split()))
+a = min(data)
+b = max(data)
+a = a+(a%2)
+b = b-(b%2)
+print(((a+b)*((b-a)//2+1))//2)
