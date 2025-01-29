@@ -1,0 +1,5 @@
+l = int(input())
+nums = list(map(int, list(input())))
+s, h = input().split()
+h = int(h)
+print("".join([str(n-h) for n in nums]) if s == "s" else "".join([str(n+h) for n in nums]))

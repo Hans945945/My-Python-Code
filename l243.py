@@ -1,0 +1,5 @@
+n = int(input())
+people = list(map(int, input().split()))
+people.sort()
+time = sum([people[i] * (n - i)for i in range(n)])
+print(time)
