@@ -9,4 +9,3 @@ if s_lowest - n < l:
     print("You are too black!")
 else:
     print(n)
-
