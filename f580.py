@@ -1,28 +1,13 @@
-data = input().split()
-n = int(data[0])
-m = int(data[1])
-dice = []
-for _ in range(n):
-    dice.append(1)
-    dice.append(3)
-    dice.append(5)
-print(dice)
+n,m = map(int, input().split())
+dice = [[1,3,5] for _ in range(n)]
 for _ in range(m):
-    nums = input().split()
-    a = int(nums[0])-1
-    b = int(nums[1])
-    if a>=0 and b>=0:
-        for i in range(3):
-            temp = dice[a*3]
-            dice[a*3] = dice[(b-1)*3]
-            dice[(b-1)*3] = temp
+    a,b = map(int, input().split())
+    if a > 0 and b > 0:
+        dice[a-1],dice[b-1] = dice[b-1],dice[a-1]
     elif b == -1:
-        temp = dice[a*3]
-        dice[a*3] = dice[a*3+1]
-        dice[a*3+1] = 7-temp
-    elif b == -2:
-        temp = dice[a*3]
-        dice[a*3] = dice[a*3+2]
-        dice[a*3+2] = 7-temp
+        dice[a-1][0], dice[a-1][1] = dice[a-1][1], 7-dice[a-1][0]
+    else:
+        dice[a-1][0], dice[a-1][2] = dice[a-1][2], 7-dice[a-1][0]
+
 for i in range(n):
-    print(dice[i*3],end = " ")
+    print(dice[i][0], end = " ")
