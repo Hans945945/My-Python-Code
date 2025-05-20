@@ -1,28 +1,30 @@
-N,M,L,Q = map(int, input().split())
-f = []
-t = []
-bad = []
-for _ in range(M):
-    a,b = map(int, input().split())
-    f.append(a)
-    t.append(b)
-for _ in range(L):
-    temp = int(input())
-    bad.append(temp)
-    while f.count(temp)!= 0 and bad.count(t[f.index(temp)]) == 0:
-        bad.append(t[f.index(temp)])
-        t.pop(f.index(temp))
-        f.pop(f.index(temp))
-for i in range(L,len(bad)):
-    temp = bad[i]
-    while f.count(temp)!= 0 and bad.count(t[f.index(temp)]) == 0:
-        bad.append(t[f.index(temp)])
-        t.pop(f.index(temp))
-        f.pop(f.index(temp))
-for _ in range(Q):
-    s = int(input())
-    if bad.count(s) == 0:
-        print("Ya~~")
-    else:
-        print("TUIHUOOOOOO")
-            
+import sys
+from collections import deque, defaultdict
+
+data = sys.stdin.readlines()
+N, M, L, Q = map(int, data[0].split())
+
+MAP = defaultdict(list)
+for i in range(M):
+    a, b = map(int, data[1+i].split())
+    MAP[a].append(b)
+
+bad = [0] * (N + 1)
+queue = deque()
+
+for i in range(L):
+    x = int(data[1+M+i])
+    if not bad[x]:
+        bad[x] = 1
+        queue.append(x)
+        
+while queue:
+    now = queue.popleft()
+    for x in MAP[now]:
+        if bad[x] == 0:
+            bad[x] = 1
+            queue.append(x)
+
+for i in range(Q):
+    y = int(data[1+M+L+i])
+    print("TUIHUOOOOOO" if bad[y] else "YA~~")
